@@ -4,6 +4,9 @@
 format: jb-book
 root: intro
 chapters:
-- file: markdown
-- file: notebooks
-- file: markdown-notebooks
+- file: Business-Understanding
+- file: Data-understanding
+- file: Data-preparation
+- file: Modelling
+- file: Deploymen
+
