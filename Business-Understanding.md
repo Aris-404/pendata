@@ -1,1 +1,3 @@
 # Bussines Understanding
+
+Dalam Proses....
