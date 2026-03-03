@@ -66,6 +66,8 @@ df = pd.read_csv(file_path)
 ```
 code untuk menambahkan file csv ke google collab
 
+**Tabel head:**
+
 ```python
 print("\n=== STRUKTUR DATA ===")
 display(df.head())
@@ -79,6 +81,8 @@ display(df.head())
 | 2 | 4.7 | 3.2 | 1.3 | 0.2 | Iris-setosa |
 | 3 | 4.6 | 3.1 | 1.5 | 0.2 | Iris-setosa |
 | 4 | 5.0 | 3.6 | 1.4 | 0.2 | Iris-setosa |
+
+**Tabel Statistik Deskriptif:**
 
 ```python
 print("\n=== STATISTIK DESKRIPTIF ===")
@@ -98,6 +102,8 @@ display(df.describe())
 | **75%** | 6.400000 | 3.300000 | 5.100000 | 1.800000 |
 | **max** | 7.900000 | 4.400000 | 6.900000 | 2.500000 |
 
+**=== ANALISIS KUALITAS DATA ===**
+
 ```python
 print("\n=== ANALISIS KUALITAS DATA ===")
 print(f"Data Duplikat: {df.duplicated().sum()}")
@@ -105,9 +111,7 @@ print("\nMissing Values:")
 print(df.isnull().sum())
 ```
 **Hasil Output Analisis Kualitas:**
-
-**=== ANALISIS KUALITAS DATA ===**
-* **Data Duplikat:** 3
+**Data Duplikat:** 3
 
 | Atribut | Jumlah Missing Value |
 | :-- | :-- |
@@ -152,6 +156,7 @@ Langkah-langkah di Orange:
 **Visualisasi Orange Data Mining:**
 
 **1. Impor Data:**
+
 ![Impor Data Orange](foto4.PNG)
 
 **2. Statistik Kolom:**
@@ -162,3 +167,6 @@ Langkah-langkah di Orange:
 
 **4. Scatter Plot:**
 ![Scatter Plot Orange](foto7.PNG)
+
+**5. Box Plot:**
+![Box Plot Orange](foto8.PNG)
