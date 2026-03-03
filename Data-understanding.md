@@ -214,9 +214,9 @@ array([[0.        , 0.53851648, 0.50990195, 0.64807407, 0.14142136],
 
 Dari analisis matriks jarak di atas, dapat disimpulkan bahwa:
 
-*Angka pada diagonal selalu nol, karena jarak antara suatu data dan dirinya sendiri adalah nol.
-*Data yang termasuk dalam kategori yang sama biasanya memiliki jarak yang dekat.
-*Jarak antara spesies Setosa dan Virginica terbilang lebih besar dibandingkan jarak antar spesies dalam kategori yang sama.
+*Angka pada diagonal selalu nol, karena jarak antara suatu data dan dirinya sendiri adalah nol.<br>
+*Data yang termasuk dalam kategori yang sama biasanya memiliki jarak yang dekat.<br>
+*Jarak antara spesies Setosa dan Virginica terbilang lebih besar dibandingkan jarak antar spesies dalam kategori yang sama.<br>
 
 2. Mahalanobis Distance
 
@@ -224,8 +224,8 @@ Selain Euclidean, saya juga mengeksplorasi Jarak Mahalanobis.
 
 Perbedaannya terletak pada fakta bahwa Mahalanobis memperhitungkan:
 
-*Variansi dari setiap fitur
-*Korelasi antar fitur
+*Variansi dari setiap fitur<br>
+*Korelasi antar fitur<br>
 
 Ini berarti bahwa jika terdapat dua fitur yang saling berhubungan, metode ini tidak akan menganggap mereka sebagai dua informasi yang sepenuhnya terpisah.
 
@@ -248,20 +248,22 @@ mahalanobis_matrix[:5, :5]
 ```
 
 **- Hasil Output Mahalanobis Distance :**
+
 array([[0.        , 1.35971517, 0.96949963, 1.4051749 , 0.59237982],
        [1.35971517, 0.        , 0.97318639, 1.45780085, 1.81903532],
        [0.96949963, 0.97318639, 0.        , 0.7175178 , 1.12917957],
        [1.4051749 , 1.45780085, 0.7175178 , 0.        , 1.32978712],
        [0.59237982, 1.81903532, 1.12917957, 1.32978712, 0.        ]])
 
+
 3. Kesimpulan Pengukuran Jarak
 
 Berdasarkan penilaian jarak yang telah dilakukan:
 
-*Informasi dalam kategori yang sama biasanya saling dekat.
-*Setosa menjadi kategori yang paling berbeda dibandingkan dua kategori lainnya.
-*Variabel petal_length dan petal_width memberikan dampak signifikan terhadap perbedaan jarak.
-*Dataset Iris menunjukkan struktur yang relatif jelas untuk proses pengklasifikasian.
+*Informasi dalam kategori yang sama biasanya saling dekat.<br>
+*Setosa menjadi kategori yang paling berbeda dibandingkan dua kategori lainnya.<br>
+*Variabel petal_length dan petal_width memberikan dampak signifikan terhadap perbedaan jarak.<br>
+*Dataset Iris menunjukkan struktur yang relatif jelas untuk proses pengklasifikasian.<br>
 
 Langkah ini masih tergolong dalam Pemahaman Data karena bertujuan untuk mengerti pola dan hubungan antar data sebelum dilakukan pemodelan.
 
