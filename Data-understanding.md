@@ -102,16 +102,19 @@ display(df.describe())
 | **75%** | 6.400000 | 3.300000 | 5.100000 | 1.800000 |
 | **max** | 7.900000 | 4.400000 | 6.900000 | 2.500000 |
 
-**=== ANALISIS KUALITAS DATA ===**
+**ANALISIS KUALITAS DATA**
 
 ```python
 print("\n=== ANALISIS KUALITAS DATA ===")
 print(f"Data Duplikat: {df.duplicated().sum()}")
+```
+**Data Duplikat:** 3
+
+```python
 print("\nMissing Values:")
 print(df.isnull().sum())
 ```
 **Hasil Output Analisis Kualitas:**
-**Data Duplikat:** 3
 
 | Atribut | Jumlah Missing Value |
 | :-- | :-- |
@@ -123,21 +126,144 @@ print(df.isnull().sum())
 
 **Visualisasi Google Colab:**
 
+**- Distribusi Jumlah Data Per Species (Colab):**
+
+```python
+df['species'].value_counts().plot(kind='bar')
+plt.title("Jumlah Data per Species")
+plt.xlabel("Species")
+plt.ylabel("Jumlah")
+plt.show()
+```
+
+![Jumlah Data Per Species Colab](foto9.PNG)
+
+**- Statistik Deskriptif (Colab):**
+
 ```python
 plt.figure(figsize=(10, 6))
 sns.scatterplot(data=df, x=df.columns[0], y=df.columns[1], hue=df.columns[-1])
 plt.title('Scatter Plot Hubungan Variabel')
 plt.show()
 ```
-**- Statistik Deskriptif (Colab):**
+
 ![Statistik Colab](foto2.PNG)
+
+**- Scatter Plot (Colab):**
 
 ```python
 df.hist(figsize=(10, 8))
 plt.show()
 ```
-**- Scatter Plot (Colab):**
+
 ![Scatter Plot Colab](foto.PNG)
+
+**- Box Plot untuk deteksi outlier (Colab):**
+
+```python
+df.plot(kind='box', figsize=(8,6))
+plt.tight_layout()
+plt.show()
+```
+
+![Box Plot Colab](foto10.PNG)
+
+### Analisis Pengukuran Jarak (Distance Matrix)
+Dalam tahap Pemahaman Data ini, saya berusaha menganalisis hubungan antar data melalui pengukuran jarak. Tujuannya adalah untuk menentukan apakah data yang berada dalam kelas yang sama benar-benar terletak berdekatan dan apakah terdapat jarak yang cukup antara kelas-kelas yang berbeda.
+
+Dengan pendekatan ini, struktur dataset dapat dipahami dengan lebih mendalam sebelum melanjutkan ke tahap Modeling.
+
+1. Euclidean Distance
+
+Metode yang digunakan pertama kali adalah Jarak Euclidean.
+
+Jarak Euclidean adalah panjang garis langsung yang menghubungkan dua titik di dalam ruang dengan banyak dimensi. Dalam dataset Iris, jarak dihitung dengan mempertimbangkan empat fitur numerik:
+
+*sepal_length
+
+*sepal_width
+
+*petal_length
+
+*petal_width
+
+Nilai jarak yang lebih kecil menunjukkan bahwa dua data semakin serupa. Sebaliknya, nilai jarak yang lebih tinggi menunjukkan perbedaan yang lebih besar.
+
+```python
+import pandas as pd
+from sklearn.metrics import pairwise_distances
+
+# Membaca dataset
+df = pd.read_csv("IRIS.csv")
+
+# Mengambil fitur numerik saja
+X = df.drop("species", axis=1)
+
+# Menghitung distance matrix Euclidean
+euclidean_matrix = pairwise_distances(X, metric="euclidean")
+
+euclidean_matrix[:5, :5]
+```
+**- Hasil Output Ecludian Matrix :**
+
+array([[0.        , 0.53851648, 0.50990195, 0.64807407, 0.14142136],
+       [0.53851648, 0.        , 0.3       , 0.33166248, 0.60827625],
+       [0.50990195, 0.3       , 0.        , 0.24494897, 0.50990195],
+       [0.64807407, 0.33166248, 0.24494897, 0.        , 0.64807407],
+       [0.14142136, 0.60827625, 0.50990195, 0.64807407, 0.        ]])
+
+Dari analisis matriks jarak di atas, dapat disimpulkan bahwa:
+
+*Angka pada diagonal selalu nol, karena jarak antara suatu data dan dirinya sendiri adalah nol.
+*Data yang termasuk dalam kategori yang sama biasanya memiliki jarak yang dekat.
+*Jarak antara spesies Setosa dan Virginica terbilang lebih besar dibandingkan jarak antar spesies dalam kategori yang sama.
+
+2. Mahalanobis Distance
+
+Selain Euclidean, saya juga mengeksplorasi Jarak Mahalanobis.
+
+Perbedaannya terletak pada fakta bahwa Mahalanobis memperhitungkan:
+
+*Variansi dari setiap fitur
+*Korelasi antar fitur
+
+Ini berarti bahwa jika terdapat dua fitur yang saling berhubungan, metode ini tidak akan menganggap mereka sebagai dua informasi yang sepenuhnya terpisah.
+
+```python
+import numpy as np
+from scipy.spatial.distance import mahalanobis
+
+# Menghitung matriks kovarians dan inversnya
+cov_matrix = np.cov(X.values.T)
+inv_cov_matrix = np.linalg.inv(cov_matrix)
+
+# Fungsi untuk menghitung Mahalanobis Distance
+def mahalanobis_distance(u, v):
+    return mahalanobis(u, v, inv_cov_matrix)
+
+# Menghitung distance matrix Mahalanobis
+mahalanobis_matrix = pairwise_distances(X, metric=mahalanobis_distance)
+
+mahalanobis_matrix[:5, :5]
+```
+
+**- Hasil Output Mahalanobis Distance :**
+array([[0.        , 1.35971517, 0.96949963, 1.4051749 , 0.59237982],
+       [1.35971517, 0.        , 0.97318639, 1.45780085, 1.81903532],
+       [0.96949963, 0.97318639, 0.        , 0.7175178 , 1.12917957],
+       [1.4051749 , 1.45780085, 0.7175178 , 0.        , 1.32978712],
+       [0.59237982, 1.81903532, 1.12917957, 1.32978712, 0.        ]])
+
+3. Kesimpulan Pengukuran Jarak
+
+Berdasarkan penilaian jarak yang telah dilakukan:
+
+*Informasi dalam kategori yang sama biasanya saling dekat.
+*Setosa menjadi kategori yang paling berbeda dibandingkan dua kategori lainnya.
+*Variabel petal_length dan petal_width memberikan dampak signifikan terhadap perbedaan jarak.
+*Dataset Iris menunjukkan struktur yang relatif jelas untuk proses pengklasifikasian.
+
+Langkah ini masih tergolong dalam Pemahaman Data karena bertujuan untuk mengerti pola dan hubungan antar data sebelum dilakukan pemodelan.
 
 ### Implementasi Menggunakan Orange Data Mining
 
