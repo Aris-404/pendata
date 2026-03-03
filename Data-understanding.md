@@ -46,38 +46,30 @@ Berikut adalah kode lengkap untuk melakukan eksplorasi data secara menyeluruh di
 
 ```python
 !pip install pandas seaborn matplotlib numpy
+```
+untuk menginstall ektensi pandas di google collab
 
+```python
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
 from google.colab import files
+```
+menampilkan library pandas
 
+```python
 print("Silakan pilih file CSV kamu:")
 uploaded = files.upload()
 file_path = list(uploaded.keys())[0]
 df = pd.read_csv(file_path)
+```
+code untuk menambahkan file csv ke google collab
 
+```python
 print("\n=== STRUKTUR DATA ===")
 display(df.head())
-
-print("\n=== STATISTIK DESKRIPTIF ===")
-display(df.describe())
-
-print("\n=== ANALISIS KUALITAS DATA ===")
-print(f"Data Duplikat: {df.duplicated().sum()}")
-print("\nMissing Values:")
-print(df.isnull().sum())
-
-plt.figure(figsize=(10, 6))
-sns.scatterplot(data=df, x=df.columns[0], y=df.columns[1], hue=df.columns[-1])
-plt.title('Scatter Plot Hubungan Variabel')
-plt.show()
-
-df.hist(figsize=(10, 8))
-plt.show()
 ```
-
 **Hasil Output (Tabel head):**
 
 | index | sepal_length | sepal_width | petal_length | petal_width | species |
@@ -87,6 +79,11 @@ plt.show()
 | 2 | 4.7 | 3.2 | 1.3 | 0.2 | Iris-setosa |
 | 3 | 4.6 | 3.1 | 1.5 | 0.2 | Iris-setosa |
 | 4 | 5.0 | 3.6 | 1.4 | 0.2 | Iris-setosa |
+
+```python
+print("\n=== STATISTIK DESKRIPTIF ===")
+display(df.describe())
+```
 
 **Hasil Output (Tabel Statistik Deskriptif):**
 
@@ -101,6 +98,12 @@ plt.show()
 | **75%** | 6.400000 | 3.300000 | 5.100000 | 1.800000 |
 | **max** | 7.900000 | 4.400000 | 6.900000 | 2.500000 |
 
+```python
+print("\n=== ANALISIS KUALITAS DATA ===")
+print(f"Data Duplikat: {df.duplicated().sum()}")
+print("\nMissing Values:")
+print(df.isnull().sum())
+```
 **Hasil Output Analisis Kualitas:**
 
 **=== ANALISIS KUALITAS DATA ===**
@@ -116,9 +119,19 @@ plt.show()
 
 **Visualisasi Google Colab:**
 
+```python
+plt.figure(figsize=(10, 6))
+sns.scatterplot(data=df, x=df.columns[0], y=df.columns[1], hue=df.columns[-1])
+plt.title('Scatter Plot Hubungan Variabel')
+plt.show()
+```
 **- Statistik Deskriptif (Colab):**
 ![Statistik Colab](foto2.PNG)
 
+```python
+df.hist(figsize=(10, 8))
+plt.show()
+```
 **- Scatter Plot (Colab):**
 ![Scatter Plot Colab](foto.PNG)
 
