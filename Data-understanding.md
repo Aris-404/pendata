@@ -82,6 +82,44 @@ display(df.head())
 | 3 | 4.6 | 3.1 | 1.5 | 0.2 | Iris-setosa |
 | 4 | 5.0 | 3.6 | 1.4 | 0.2 | Iris-setosa |
 
+**Pengecekan Jumlah Dataset**
+
+```pyhton
+df.shape
+```
+
+**Hasil Pengecekan Dataset**
+
+|150|5|
+
+**Informasi Dataset**
+
+```python
+df.info()
+```
+Hasil menunjukkan dataset terdiri dari 150 baris dan 5 kolom.
+
+**Informasi Dataset :**
+
+<class 'pandas.DataFrame'>
+RangeIndex: 150 entries, 0 to 149
+Data columns (total 5 columns):
+| # | |Column      |   |Non-Null Count | |Dtype  |
+|---| |------      |   |-------------- | |-----  |
+| 0 | |sepal_length|   |150 non-null   | |float64|
+| 1 | |sepal_width |   |150 non-null   | |float64|
+| 2 | |petal_length|   |150 non-null   | |float64|
+| 3 | |petal_width |   |150 non-null   | |float64|
+| 4 | |species     |   |150 non-null   | |str    |
+dtypes: float64(4), str(1)
+memory usage: 6.0 KB
+
+Dari hasil di atas dapat disimpulkan:
+
+*Empat kolom bertipe float (numerik).<br>
+*Satu kolom bertipe object (kategori).<br>
+*Tidak terdapat nilai null pada seluruh kolom.<br>
+
 **Tabel Statistik Deskriptif:**
 
 ```python
@@ -104,17 +142,23 @@ display(df.describe())
 
 **ANALISIS KUALITAS DATA**
 
+**Mencari Data Duplikat:**
+
 ```python
 print("\n=== ANALISIS KUALITAS DATA ===")
 print(f"Data Duplikat: {df.duplicated().sum()}")
 ```
+
 **Data Duplikat:** 3
+
+**Mencari Data Missing Value:**
 
 ```python
 print("\nMissing Values:")
 print(df.isnull().sum())
 ```
-**Hasil Output Analisis Kualitas:**
+
+**Hasil Output Missing Value:**
 
 | Atribut | Jumlah Missing Value |
 | :-- | :-- |
@@ -206,11 +250,13 @@ euclidean_matrix[:5, :5]
 ```
 **- Hasil Output Ecludian Matrix :**
 
+```python
 array([[0.        , 0.53851648, 0.50990195, 0.64807407, 0.14142136],
        [0.53851648, 0.        , 0.3       , 0.33166248, 0.60827625],
        [0.50990195, 0.3       , 0.        , 0.24494897, 0.50990195],
        [0.64807407, 0.33166248, 0.24494897, 0.        , 0.64807407],
        [0.14142136, 0.60827625, 0.50990195, 0.64807407, 0.        ]])
+```
 
 Dari analisis matriks jarak di atas, dapat disimpulkan bahwa:
 
@@ -249,12 +295,13 @@ mahalanobis_matrix[:5, :5]
 
 **- Hasil Output Mahalanobis Distance :**
 
+```python
 array([[0.        , 1.35971517, 0.96949963, 1.4051749 , 0.59237982],
        [1.35971517, 0.        , 0.97318639, 1.45780085, 1.81903532],
        [0.96949963, 0.97318639, 0.        , 0.7175178 , 1.12917957],
        [1.4051749 , 1.45780085, 0.7175178 , 0.        , 1.32978712],
        [0.59237982, 1.81903532, 1.12917957, 1.32978712, 0.        ]])
-
+```
 
 3. Kesimpulan Pengukuran Jarak
 
