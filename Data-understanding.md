@@ -90,7 +90,9 @@ df.shape
 
 **Hasil Pengecekan Dataset**
 
-|150|5|
+```python
+(150, 5)
+```
 
 **Informasi Dataset**
 
@@ -101,18 +103,19 @@ Hasil menunjukkan dataset terdiri dari 150 baris dan 5 kolom.
 
 **Informasi Dataset :**
 
-<class 'pandas.DataFrame'>
+```python
 RangeIndex: 150 entries, 0 to 149
 Data columns (total 5 columns):
-| # | |Column      |   |Non-Null Count | |Dtype  |
-|---| |------      |   |-------------- | |-----  |
-| 0 | |sepal_length|   |150 non-null   | |float64|
-| 1 | |sepal_width |   |150 non-null   | |float64|
-| 2 | |petal_length|   |150 non-null   | |float64|
-| 3 | |petal_width |   |150 non-null   | |float64|
-| 4 | |species     |   |150 non-null   | |str    |
-dtypes: float64(4), str(1)
-memory usage: 6.0 KB
+ #   Column        Non-Null Count  Dtype  
+---  ------        --------------  -----  
+ 0   sepal_length  150 non-null    float64
+ 1   sepal_width   150 non-null    float64
+ 2   petal_length  150 non-null    float64
+ 3   petal_width   150 non-null    float64
+ 4   species       150 non-null    object 
+dtypes: float64(4), object(1)
+memory usage: 6.0+ KB
+```
 
 Dari hasil di atas dapat disimpulkan:
 
