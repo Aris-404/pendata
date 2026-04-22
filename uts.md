@@ -122,4 +122,109 @@
     # Laporan lengkap
     print("\nClassification Report:")
     print(classification_report(y_test, y_pred, target_names=['Tidak Subur', 'Subur']))
-````
+```
+
+### Gambar Knime :
+
+![KNIME :](uts.jpeg)
+
+### Penjelasan Knime :
+ ## 1 Input Data
+CSV Reader
+
+* Membaca dataset dari file `.csv`
+
+ ## 2 Data Cleaning & Transformasi Awal
+String Replacer (beberapa node berurutan)
+
+Digunakan untuk:
+
+* Mengganti nilai teks → nilai numerik
+  Contoh:
+
+  * `Subur` → `1`
+  * `Tidak Subur` → `0`
+* Menghapus spasi, simbol, atau kata yang tidak konsisten
+* Menyeragamkan format data kategorikal
+
+ Karena KNN hanya bisa bekerja dengan data numerik, tahap ini wajib.
+
+ ## 3 Konversi Tipe Data
+String to Number
+
+* Mengubah kolom bertipe *String* menjadi *Integer / Double*
+* Biasanya setelah proses String Replacer selesai
+
+ ## 4. Penanganan Missing Value
+Missing Value
+
+* Mengisi data kosong (null)
+* Bisa dengan:
+
+  * Mean / Median
+  * Nilai konstan
+  * KNN Imputation (tergantung setting)
+
+ ## 5. Pembagian Data
+Table Partitioner
+
+* Membagi data menjadi:
+
+  * Training data (80%)
+  * Testing data (20%)
+
+ ## 6. Normalisasi Data
+Normalizer
+
+* Digunakan pada data training
+* Contoh metode:
+
+  * Min–Max
+  * Z-Score
+* Supaya semua fitur berada pada skala yang sama
+Normalizer (Apply)
+
+* Menerapkan parameter normalisasi dari data training ke data testing
+
+## 7. Reduksi Dimensi
+PCA Compute
+
+* Menghitung komponen utama (Principal Component)
+* Mengurangi jumlah fitur
+* Menghilangkan korelasi antar fitur
+PCA Apply (2 node)
+
+* PCA Apply atas → untuk training data
+* PCA Apply bawah → untuk testing data
+* Menggunakan hasil PCA Compute yang sama
+
+ Garis merah di gambar menandakan koneksi model PCA
+
+ ## 8. Model Klasifikasi
+K Nearest Neighbor
+
+* Model klasifikasi berbasis jarak
+* Menggunakan data hasil:
+
+  * Normalisasi
+  * PCA
+* Parameter umum:
+
+  * K (jumlah tetangga)
+  * Distance metric (Euclidean, dll)
+
+## 9. Evaluasi Model
+Scorer
+
+* Membandingkan:
+
+  * Label asli
+  * Hasil prediksi KNN
+* Menghasilkan metrik:
+
+  * Accuracy
+  * Precision
+  * Recall
+  * Confusion Matrix
+
+
