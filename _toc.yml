@@ -12,5 +12,6 @@ chapters:
 - file: uts
 - file: decision-three
 - file: regresi-linier
+- file: peramalan-kadar
 
 
